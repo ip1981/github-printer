@@ -33,14 +33,15 @@ def init_repo(path):
 
 
 def start_date():
-    """ Returns next nearest sunday - top line in github graph """
+    """ Returns a sunday somewhere near to the left side of github graph """
     day = datetime.date.today()
     while day.weekday() != 6:
         day += datetime.timedelta(days=1)
+    day += datetime.timedelta(weeks=-50)
     return day
 
 def dates(text):
-    date = start_date() + datetime.timedelta(weeks=-50)
+    date = start_date()
     print ('start date: {}'.format(date))
     row_start_date = date
     for row in glyphs(text):
