@@ -13,6 +13,7 @@ import datetime
 import os
 import shutil
 import subprocess
+import sys
 
 from glyphs import glyphs
 
@@ -64,7 +65,16 @@ def imprint(text):
             cnt.write("\n")
         git('commit', content_file, '--date={}'.format(date_str), '-m', date_str)
 
+def usage():
+    print('Usage: {script} "text"'.format(script=sys.argv[0]))
+
 if __name__ == '__main__':
+    try:
+        text = sys.argv[1]
+    except IndexError:
+        usage()
+        sys.exit(1)
+
     init_repo(repo_dir)
-    imprint('Hello :)')
+    imprint(text)
 
